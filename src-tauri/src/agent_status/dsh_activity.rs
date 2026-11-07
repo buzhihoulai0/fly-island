@@ -97,7 +97,6 @@ fn latest_activity_age_ms(home_dir: &Path) -> Option<u128> {
 mod tests {
     use super::*;
     use std::path::PathBuf;
-    use std::time::UNIX_EPOCH;
 
     fn temp_home(name: &str) -> PathBuf {
         let base = std::env::temp_dir().join(format!("focusd-dsh-activity-{name}"));
@@ -131,12 +130,11 @@ mod tests {
         let file = session.join("session.v4.jsonl.zstd");
         fs::write(&file, b"x").unwrap();
         let old = SystemTime::now() - Duration::from_secs(3_600);
-        let stamp = old.duration_since(UNIX_EPOCH).unwrap();
         fs::File::options()
             .write(true)
             .open(&file)
             .unwrap()
-            .set_modified(stamp)
+            .set_modified(old)
             .unwrap();
         assert_eq!(compute_phase(&home), "idle");
         fs::remove_dir_all(&home).ok();
