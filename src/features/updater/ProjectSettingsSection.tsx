@@ -35,7 +35,7 @@ export function ProjectSettingsSection() {
       <UpdatePanel />
       <a
         className="project-link project-link--star"
-        href="https://github.com/flyl1u/fly-island"
+        href="https://github.com/buzhihoulai0/fly-island"
         target="_blank"
         rel="noopener noreferrer"
         onClick={openProjectLink}

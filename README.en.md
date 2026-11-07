@@ -10,15 +10,15 @@
   <p>
     <a href="https://island.flyliu.org/">Live Preview</a>
     ·
-    <a href="https://github.com/flyl1u/fly-island/releases/latest">Download Release</a>
+    <a href="https://github.com/buzhihoulai0/fly-island/releases/latest">Download Release</a>
     ·
-    <a href="https://github.com/flyl1u/fly-island/issues">Report an Issue</a>
+    <a href="https://github.com/buzhihoulai0/fly-island/issues">Report an Issue</a>
     ·
     <a href="#community">Community</a>
   </p>
 
   <p>
-    <img alt="Version" src="https://img.shields.io/github/v/release/flyl1u/fly-island?label=version">
+    <img alt="Version" src="https://img.shields.io/github/v/release/buzhihoulai0/fly-island?label=version">
     <img alt="Platform" src="https://img.shields.io/badge/platform-Windows-0078D4">
     <img alt="Tauri" src="https://img.shields.io/badge/Tauri-2-24C8DB">
     <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB">
@@ -84,7 +84,7 @@ Join the **fly-island user group on WeChat** to discuss the app, report problems
   <img src="docs/assets/wechat-community.jpg" alt="QR code for the fly-island WeChat user group" width="360">
 </p>
 
-The QR code expires; the current image says it is **valid before November 11**. If it has expired, please [open an issue](https://github.com/flyl1u/fly-island/issues) to request an update.
+The QR code expires; the current image says it is **valid before November 11**. If it has expired, please [open an issue](https://github.com/buzhihoulai0/fly-island/issues) to request an update.
 
 ## Development and build
 
@@ -93,7 +93,7 @@ The QR code expires; the current image says it is **valid before November 11**. 
 You need Windows 10/11, Node.js, pnpm, Rust, Visual Studio C++ Build Tools, and WebView2 Runtime.
 
 ```powershell
-git clone https://github.com/flyl1u/fly-island.git
+git clone https://github.com/buzhihoulai0/fly-island.git
 cd fly-island
 pnpm install
 pnpm tauri dev
@@ -116,7 +116,7 @@ The generated installers are placed in:
 - `src-tauri/target/release/bundle/nsis/fly-island_VERSION_x64-setup.exe`
 - `src-tauri/target/release/bundle/msi/fly-island_VERSION_x64_en-US.msi`
 
-You can also download the latest Windows x64 installers from [GitHub Releases](https://github.com/flyl1u/fly-island/releases/latest).
+You can also download the latest Windows x64 installers from [GitHub Releases](https://github.com/buzhihoulai0/fly-island/releases/latest).
 
 ## Contributors
 
