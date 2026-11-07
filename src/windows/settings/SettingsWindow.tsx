@@ -56,6 +56,11 @@ export function SettingsWindow() {
     setHighlightSavePath(true);
   }, []);
 
+  // The host monitor page asks for its own settings block, which lives on the integrations page.
+  const focusIntegrations = useCallback(() => {
+    setCategory("integrations");
+  }, []);
+
   useEffect(() => {
     void getCurrentWindow()
       .setTitle(`fly-island ${t.settings.title}`)
@@ -73,8 +78,11 @@ export function SettingsWindow() {
   }, [presets]);
 
   useEffect(() => {
-    if (takeFocusRequest() === "savePath") {
+    const request = takeFocusRequest();
+    if (request === "savePath") {
       focusSavePath();
+    } else if (request === "integrations") {
+      focusIntegrations();
     }
 
     const syncFromIsland = (event: StorageEvent) => {
@@ -89,18 +97,19 @@ export function SettingsWindow() {
         setSaveDirectoryDraft(loadSaveDirectory());
       }
 
-      if (
-        event.key === SETTINGS_FOCUS_STORAGE_KEY &&
-        event.newValue !== null &&
-        takeFocusRequest() === "savePath"
-      ) {
-        focusSavePath();
+      if (event.key === SETTINGS_FOCUS_STORAGE_KEY && event.newValue !== null) {
+        const nextRequest = takeFocusRequest();
+        if (nextRequest === "savePath") {
+          focusSavePath();
+        } else if (nextRequest === "integrations") {
+          focusIntegrations();
+        }
       }
     };
 
     window.addEventListener("storage", syncFromIsland);
     return () => window.removeEventListener("storage", syncFromIsland);
-  }, [focusSavePath]);
+  }, [focusIntegrations, focusSavePath]);
 
   useEffect(() => {
     void readLaunchAtStartup()

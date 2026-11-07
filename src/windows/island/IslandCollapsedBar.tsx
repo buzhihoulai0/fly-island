@@ -5,6 +5,7 @@ import { MessageSourceIcon } from "../../features/messages/MessageSourceIcon";
 // After CollapsedMessageContent, matching the original stylesheet order.
 import { MusicWaveButton } from "../../features/media/MusicWaveButton";
 import { messagePreviewText, type MessagePreview, type MessageSource } from "../../features/messages/messagePreview";
+import type { HostPulseState } from "../../features/host-monitor/types";
 import type { QQMailController } from "../../features/messages/qq-mail/QQMail";
 import type { QQNotificationsController } from "../../features/messages/qq-notifications/QQNotifications";
 import type { WeChatRemindersController } from "../../features/messages/wechat/WeChatReminders";
@@ -29,6 +30,8 @@ type IslandCollapsedBarProps = {
   mediaState: MediaState;
   agentVisualState: AgentVisualState;
   agentStatusLabel: string;
+  hostPulseState: HostPulseState | null;
+  hostStatusLabel: string | null;
   onOpenPage: (page: IslandPage) => void;
   onOpenMessages: (source: MessageSource) => void;
   onWindowDragStart: () => void;
@@ -52,6 +55,8 @@ export function IslandCollapsedBar({
   mediaState,
   agentVisualState,
   agentStatusLabel,
+  hostPulseState,
+  hostStatusLabel,
   onOpenPage,
   onOpenMessages,
   onWindowDragStart,
@@ -106,6 +111,13 @@ export function IslandCollapsedBar({
         }}
       >
         <span className={pulseClassName} title={agentStatusLabel} />
+        {hostPulseState !== null && (
+          <span
+            className={`island__host-light island__host-light--${hostPulseState}`}
+            title={hostStatusLabel ?? undefined}
+            aria-hidden="true"
+          />
+        )}
         <CollapsedMessageContent preview={preview} enabled={!isExpanded && !isTucked}>
           {showCollapsedText && showTitle && (
             <span className="island__brand">fly-island</span>

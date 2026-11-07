@@ -11,6 +11,7 @@ import { TodoSettingsSection } from "../../features/appearance/TodoSettingsSecti
 import type { IslandPreset, IslandSettings } from "../../features/appearance/types";
 import type { ClipboardHistorySettings } from "../../features/clipboard/api";
 import { ClipboardSettingsSection } from "../../features/clipboard/ClipboardSettingsSection";
+import { HostMonitorSettingsSection } from "../../features/host-monitor/HostMonitorSettingsSection";
 import { QQNotificationControls, type QQNotificationsController } from "../../features/messages/qq-notifications/QQNotifications";
 import { WeChatReminderControls, type WeChatRemindersController } from "../../features/messages/wechat/WeChatReminders";
 import { SavePathSettingsSection } from "../../features/todos/SavePathSettingsSection";
@@ -165,6 +166,7 @@ export function LayoutEditor({
               onClipboardSettingsChange={onClipboardSettingsChange}
               onClipboardShortcutFocusHandled={onClipboardShortcutFocusHandled}
             />
+            <HostMonitorSettingsSection />
           </>
         )}
 

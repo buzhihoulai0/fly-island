@@ -188,9 +188,51 @@ export type Translations = {
     todoList: string;
     music: string;
     clipboardHistory: string;
+    hostMonitor: string;
     layoutEditor: string;
   };
 
+  host: {
+    title: string;
+    dotLabel: string;
+    cpu: string;
+    memory: string;
+    disk: string;
+    temperature: string;
+    load: string;
+    cores: string;
+    uptime: string;
+    services: string;
+    servicesSummary: (ok: number, total: number, attention: number) => string;
+    network: string;
+    download: string;
+    upload: string;
+    processes: string;
+    connected: string;
+    connecting: string;
+    offline: string;
+    stale: string;
+    notConfigured: string;
+    notConfiguredHint: string;
+    noData: string;
+    retry: string;
+    openSettings: string;
+    updated: string;
+    updatedAgo: (seconds: number) => string;
+    refreshInterval: (seconds: number) => string;
+    status: {
+      ok: string;
+      degraded: string;
+      down: string;
+      unknown: string;
+    };
+    pulse: {
+      ok: string;
+      degraded: string;
+      down: string;
+      offline: string;
+    };
+  };
   agent: {
     running: (provider: string) => string;
     failed: (provider: string) => string;
@@ -423,6 +465,28 @@ export type Translations = {
       pressKeys: string;
     };
 
+    hostMonitor: {
+      title: string;
+      description: string;
+      enabled: string;
+      showInCollapsed: string;
+      baseUrl: string;
+      baseUrlPlaceholder: string;
+      interval: string;
+      intervalHint: string;
+      token: string;
+      tokenPlaceholder: string;
+      tokenHint: string;
+      tokenSaved: (hasToken: boolean) => string;
+      tokenClear: string;
+      save: string;
+      saving: string;
+      saved: string;
+      test: string;
+      testing: string;
+      testOk: (hostname: string, latency: number, services: number) => string;
+      testFailed: (reason: string) => string;
+    };
     colors: {
       title: string;
       taskText: string;

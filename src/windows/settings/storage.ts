@@ -2,7 +2,7 @@ import { readString, writeString, removeItem } from "../../lib/storage.ts";
 // Main island -> settings window request to reveal a section; survives the window being created.
 export const SETTINGS_FOCUS_STORAGE_KEY = "focusd-island-settings-focus";
 
-export type SettingsFocusSection = "savePath";
+export type SettingsFocusSection = "savePath" | "integrations";
 
 export const FOCUS_REQUEST_MAX_AGE_MS = 10_000;
 
@@ -21,10 +21,15 @@ export function takeFocusRequest(): SettingsFocusSection | null {
       requestedAt?: unknown;
     };
 
-    return request.section === "savePath" &&
+    const section =
+      request.section === "savePath" || request.section === "integrations"
+        ? request.section
+        : null;
+
+    return section !== null &&
       typeof request.requestedAt === "number" &&
       Date.now() - request.requestedAt < FOCUS_REQUEST_MAX_AGE_MS
-      ? request.section
+      ? section
       : null;
   } catch {
     return null;

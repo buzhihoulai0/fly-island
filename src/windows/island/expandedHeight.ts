@@ -1,7 +1,7 @@
 import { messagePanelHeight, type MessageView } from "../../features/messages/Messages";
 import { TODO_SCROLL_START_ROWS } from "../../features/todos/layout";
 import type { TodoItem, TodoPageMode } from "../../features/todos/types";
-import { BASE_EXPANDED_ISLAND_HEIGHT, CLIPBOARD_EXPANDED_ISLAND_HEIGHT, MUSIC_EXPANDED_ISLAND_HEIGHT, MUSIC_SETTINGS_EXPANDED_ISLAND_HEIGHT, TODO_ARCHIVE_EXPANDED_ISLAND_HEIGHT, TODO_GROW_START_ROWS, TODO_ROW_HEIGHT, getTodoVisualRows } from "./layout";
+import { BASE_EXPANDED_ISLAND_HEIGHT, CLIPBOARD_EXPANDED_ISLAND_HEIGHT, HOST_EXPANDED_ISLAND_HEIGHT, MUSIC_EXPANDED_ISLAND_HEIGHT, MUSIC_SETTINGS_EXPANDED_ISLAND_HEIGHT, TODO_ARCHIVE_EXPANDED_ISLAND_HEIGHT, TODO_GROW_START_ROWS, TODO_ROW_HEIGHT, getTodoVisualRows } from "./layout";
 import type { IslandPage } from "./types";
 
 type ExpandedHeightInput = {
@@ -47,5 +47,7 @@ export function getExpandedIslandHeight({
         : MUSIC_EXPANDED_ISLAND_HEIGHT + (hasMediaCommandError ? 24 : 0)
       : page === "clipboard"
         ? CLIPBOARD_EXPANDED_ISLAND_HEIGHT
-        : messagePanelHeight(messageSource, isReadingMail);
+        : page === "host"
+          ? HOST_EXPANDED_ISLAND_HEIGHT
+          : messagePanelHeight(messageSource, isReadingMail);
 }

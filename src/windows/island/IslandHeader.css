@@ -133,6 +133,11 @@
   box-shadow: 0 0 12px rgba(255, 209, 102, 0.48);
 }
 
+.dot-button--host {
+  background: #35e985;
+  box-shadow: 0 0 12px rgba(53, 233, 133, 0.48);
+}
+
 .dot-button--active {
   box-shadow:
     0 0 0 3px var(--color-white-a18),
@@ -149,6 +154,12 @@
   box-shadow:
     0 0 0 3px var(--color-white-a18),
     0 0 14px rgba(255, 209, 102, 0.56);
+}
+
+.dot-button--host.dot-button--active {
+  box-shadow:
+    0 0 0 3px var(--color-white-a18),
+    0 0 14px rgba(53, 233, 133, 0.56);
 }
 
 .window-actions {

@@ -46,6 +46,10 @@
   --glass-page-accent: 182, 169, 211;
 }
 
+.island--host {
+  --glass-page-accent: 64, 220, 160;
+}
+
 .island__glass {
   display: none;
 }

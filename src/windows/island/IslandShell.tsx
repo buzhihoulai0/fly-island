@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import type { AgentVisualState } from "../../features/agent-status/status";
 import type { AppearanceMode } from "../../features/appearance/types";
 import { getEffectiveAppearanceMode } from "../../features/appearance/settings";
+import type { HostPulseState } from "../../features/host-monitor/types";
 import type { MediaState } from "../../features/media/api";
 import { latestMessagePreview, type MessageSource } from "../../features/messages/messagePreview";
 import type { QQMailController } from "../../features/messages/qq-mail/QQMail";
@@ -33,6 +34,8 @@ type IslandShellProps = {
   mediaState: MediaState;
   agentVisualState: AgentVisualState;
   agentStatusLabel: string;
+  hostPulseState: HostPulseState | null;
+  hostStatusLabel: string | null;
   onOpenPage: (page: IslandPage) => void;
   onWindowDragStart: () => void;
   onCollapse: () => void;
@@ -64,6 +67,8 @@ export function IslandShell({
   mediaState,
   agentVisualState,
   agentStatusLabel,
+  hostPulseState,
+  hostStatusLabel,
   onOpenPage,
   onWindowDragStart,
   onCollapse,
@@ -153,6 +158,8 @@ export function IslandShell({
           mediaState={mediaState}
           agentVisualState={agentVisualState}
           agentStatusLabel={agentStatusLabel}
+          hostPulseState={hostPulseState}
+          hostStatusLabel={hostStatusLabel}
           onOpenPage={onOpenPage}
           onOpenMessages={onOpenMessages}
           onWindowDragStart={onWindowDragStart}

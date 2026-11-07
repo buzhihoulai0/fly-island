@@ -45,6 +45,31 @@
   box-shadow: 0 0 14px rgba(255, 209, 102, 0.72);
 }
 
+.island__host-light {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  margin-left: calc(var(--space-md) * -1 + 3px);
+  border-radius: var(--radius-pill);
+  background: var(--color-agent-idle);
+  box-shadow: 0 0 9px rgba(53, 233, 133, 0.6);
+}
+
+.island__host-light--degraded {
+  background: var(--color-warning);
+  box-shadow: 0 0 9px rgba(255, 209, 102, 0.62);
+}
+
+.island__host-light--down {
+  background: var(--color-danger);
+  box-shadow: 0 0 9px rgba(199, 80, 101, 0.66);
+}
+
+.island__host-light--offline {
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: none;
+}
+
 .island--title-hidden .island__open-button {
   padding-left: 8px;
 }

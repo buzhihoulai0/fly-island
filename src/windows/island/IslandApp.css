@@ -93,6 +93,7 @@
 
 .todo-notebook,
 .music-player,
+.host-panel,
 .editor-panel {
   height: 100%;
   border-radius: 22px;
@@ -101,6 +102,7 @@
 
 .island--appearance-liquidGlass .music-player,
 .island--appearance-liquidGlass .clipboard-panel,
+.island--appearance-liquidGlass .host-panel,
 .island--appearance-liquidGlass .editor-panel {
   background:
     radial-gradient(
@@ -158,6 +160,7 @@
 
 .island--appearance-liquidGlass.island--glass-css-fallback .music-player,
 .island--appearance-liquidGlass.island--glass-css-fallback .clipboard-panel,
+.island--appearance-liquidGlass.island--glass-css-fallback .host-panel,
 .island--appearance-liquidGlass.island--glass-css-fallback .editor-panel {
   background:
     radial-gradient(circle at 82% 12%, rgba(var(--glass-page-accent), 0.13), transparent 34%),

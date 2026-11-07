@@ -13,6 +13,9 @@ import { getAgentStatusLabel, getAgentVisualState } from "../../features/agent-s
 import { useAgentStatus } from "../../features/agent-status/useAgentStatus";
 import { useIslandSettings } from "../../features/appearance/useIslandSettings";
 import { ClipboardHistoryPanel } from "../../features/clipboard/ClipboardHistoryPanel";
+import { HostMonitorPanel } from "../../features/host-monitor/HostMonitorPanel";
+import { getHostPulseState } from "../../features/host-monitor/status";
+import { useHostMonitor } from "../../features/host-monitor/useHostMonitor";
 import { useClipboardHistory } from "../../features/clipboard/useClipboardHistory";
 import { MusicPlayerPanel } from "../../features/media/MusicPlayerPanel";
 // Imported after the page panels so its CSS keeps its place in the cascade.
@@ -56,6 +59,7 @@ export function IslandApp() {
   } = useMediaState();
   const [musicSettingsOpen, setMusicSettingsOpen] = useState(false);
   const agentStatus = useAgentStatus();
+  const hostMonitor = useHostMonitor();
   const [settings, setSettings] = useIslandSettings();
 
   const openSavePathSettings = useCallback(() => {
@@ -146,6 +150,10 @@ export function IslandApp() {
     [agentStatus, t],
   );
 
+  const hostPulseState = useMemo(() => getHostPulseState(hostMonitor.view), [hostMonitor.view]);
+  const hostStatusLabel = useMemo(() => t.host.pulse[hostPulseState], [hostPulseState, t]);
+  const hostStatusVisible = Boolean(hostMonitor.view?.configured && hostMonitor.view.showInCollapsed);
+
   const openTranslator = useCallback(() => {
     void toggleTranslationWindow().catch((error) => {
       console.error("Failed to open translation", error);
@@ -172,6 +180,8 @@ export function IslandApp() {
         mediaState={mediaState}
         agentVisualState={agentVisualState}
         agentStatusLabel={agentStatusLabel}
+        hostPulseState={hostStatusVisible ? hostPulseState : null}
+        hostStatusLabel={hostStatusVisible ? hostStatusLabel : null}
         onOpenPage={openIslandPage}
         onWindowDragStart={startIslandDrag}
         onCollapse={collapseIsland}
@@ -211,6 +221,13 @@ export function IslandApp() {
             onUpdateNote={updateClipboardHistoryItemNote}
             onDeleteItem={(id) => void deleteClipboardHistoryItem(id)}
             onClear={() => void clearClipboardHistoryItems()}
+          />
+        )}
+        {page === "host" && (
+          <HostMonitorPanel
+            view={hostMonitor.view}
+            onRetry={() => void hostMonitor.refresh()}
+            onOpenSettings={() => openSettingsWindow("integrations")}
           />
         )}
         {page === "todo" && (

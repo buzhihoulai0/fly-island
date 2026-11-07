@@ -99,6 +99,18 @@ export function IslandHeader({
           }}
         />
         <button
+          className={`dot-button dot-button--host ${
+            page === "host" ? "dot-button--active" : ""
+          }`}
+          type="button"
+          title={t.host.dotLabel}
+          aria-label={t.host.dotLabel}
+          onClick={(event) => {
+            event.stopPropagation();
+            onPageChange("host");
+          }}
+        />
+        <button
           className="dot-button dot-button--layout"
           type="button"
           title={t.settings.title}

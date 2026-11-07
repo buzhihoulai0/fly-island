@@ -1,0 +1,362 @@
+/* Host monitor panel: 与剪贴板页同一套玻璃卡片语言，按 560x344 的内容区排版。 */
+.host-panel {
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: 8px;
+  padding: 10px 12px 12px;
+  overflow: hidden;
+  color: rgba(241, 240, 246, 0.92);
+  background:
+    radial-gradient(circle at 90% 8%, rgba(64, 220, 160, 0.12), transparent 34%),
+    linear-gradient(145deg, var(--color-white-a09), rgba(255, 255, 255, 0.018)),
+    rgba(20, 20, 25, 0.88);
+  border-radius: 20px;
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.24),
+    inset 0 0 0 1px var(--color-white-a09);
+}
+
+.host-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+.host-panel__identity {
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.host-panel__name {
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.host-panel__address {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(241, 240, 246, 0.46);
+  font-size: 10px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.host-panel__badge {
+  flex: none;
+  padding: 3px 8px;
+  color: rgba(12, 20, 16, 0.9);
+  background: var(--color-success);
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.host-panel__badge--degraded {
+  background: var(--color-warning);
+}
+
+.host-panel__badge--down {
+  color: rgba(255, 245, 246, 0.95);
+  background: var(--color-danger);
+}
+
+.host-panel__badge--offline {
+  color: rgba(241, 240, 246, 0.72);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.host-panel__metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.host-panel__metric {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+  padding: 7px 9px 6px;
+  background: rgba(255, 255, 255, 0.045);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.host-panel__metric-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px;
+  color: rgba(241, 240, 246, 0.6);
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.host-panel__metric-detail {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(241, 240, 246, 0.38);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.host-panel__metric-value {
+  color: var(--color-text);
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.host-panel__uptime {
+  color: rgba(241, 240, 246, 0.42);
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.host-panel__bar {
+  height: 3px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+}
+
+.host-panel__bar span {
+  display: block;
+  height: 100%;
+  background: var(--color-success);
+  border-radius: inherit;
+}
+
+.host-panel__spark {
+  width: 100%;
+  height: 20px;
+  color: var(--color-accent);
+}
+
+.host-panel__spark polyline {
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+
+.host-panel__spark--empty {
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.host-panel__metric--memory .host-panel__spark {
+  color: #b69cff;
+}
+
+.host-panel__metric--disk .host-panel__spark,
+.host-panel__spark--network {
+  color: var(--color-agent-idle);
+}
+
+.host-panel__metric--temperature .host-panel__spark {
+  color: var(--color-warning);
+}
+
+.host-panel__body {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 7px;
+}
+
+.host-panel__card {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 6px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.host-panel__card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  color: rgba(241, 240, 246, 0.86);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.host-panel__card-detail {
+  color: rgba(241, 240, 246, 0.4);
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.host-panel__service-list {
+  min-height: 0;
+  margin: 0;
+  padding: 0 2px 0 0;
+  overflow-y: auto;
+  list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+.host-panel__service-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.host-panel__service-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-pill);
+}
+
+.host-panel__service {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.045);
+  font-size: 10.5px;
+}
+
+.host-panel__service:last-child {
+  border-bottom: 0;
+}
+
+.host-panel__service-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--color-agent-idle);
+  border-radius: var(--radius-circle);
+  box-shadow: 0 0 6px rgba(53, 233, 133, 0.5);
+}
+
+.host-panel__service--degraded .host-panel__service-dot {
+  background: var(--color-warning);
+  box-shadow: 0 0 6px rgba(255, 209, 102, 0.5);
+}
+
+.host-panel__service--down .host-panel__service-dot {
+  background: var(--color-danger);
+  box-shadow: 0 0 6px rgba(199, 80, 101, 0.55);
+}
+
+.host-panel__service--unknown .host-panel__service-dot {
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: none;
+}
+
+.host-panel__service-name {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(241, 240, 246, 0.9);
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.host-panel__service--optional .host-panel__service-name {
+  color: rgba(241, 240, 246, 0.62);
+}
+
+.host-panel__service-usage {
+  color: rgba(241, 240, 246, 0.42);
+  font-size: 9.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.host-panel__side {
+  grid-template-rows: auto 20px minmax(0, 1fr);
+}
+
+.host-panel__stats {
+  min-height: 0;
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.host-panel__stats div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  font-size: 10px;
+}
+
+.host-panel__stats dt {
+  color: rgba(241, 240, 246, 0.42);
+  font-weight: 700;
+}
+
+.host-panel__stats dd {
+  margin: 0;
+  color: rgba(241, 240, 246, 0.86);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.host-panel--empty {
+  grid-template-rows: auto auto auto;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-md);
+  padding: 24px;
+  text-align: center;
+}
+
+.host-panel__empty-title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.host-panel__empty-hint {
+  max-width: 380px;
+  margin: 0;
+  color: rgba(241, 240, 246, 0.5);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.host-panel__action {
+  height: 30px;
+  padding: 0 14px;
+  color: rgba(12, 20, 16, 0.9);
+  background: var(--color-sky);
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.host-panel__action:hover,
+.host-panel__action:focus-visible {
+  background: #c6e6f4;
+}
+
+.host-panel__action:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}

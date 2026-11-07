@@ -1,5 +1,6 @@
 mod agent_status;
 mod clipboard_history;
+mod host_monitor;
 mod island;
 mod media_control;
 mod messenger_activation;
@@ -51,6 +52,9 @@ pub fn run() {
             tray::build_tray(app)?;
             if let Err(error) = clipboard_history::init(app.handle()) {
                 eprintln!("failed to initialize clipboard history: {error}");
+            }
+            if let Err(error) = host_monitor::init(app.handle()) {
+                eprintln!("failed to initialize host monitor: {error}");
             }
             translation::init(app.handle());
             if let Err(error) = qq_mail::init(app.handle()) {
@@ -134,6 +138,10 @@ pub fn run() {
             translation::translate_text,
             translation::set_translation_shortcut,
             settings_window::open_settings_window,
+            host_monitor::get_host_monitor_state,
+            host_monitor::set_host_monitor_config,
+            host_monitor::refresh_host_monitor,
+            host_monitor::test_host_monitor_connection,
         ])
         .run(context)
         .expect("error while running FocuSD Island");

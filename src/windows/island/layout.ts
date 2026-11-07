@@ -11,6 +11,7 @@ export const TODO_ARCHIVE_EXPANDED_ISLAND_HEIGHT = 352;
 export const MUSIC_EXPANDED_ISLAND_HEIGHT = 320;
 export const MUSIC_SETTINGS_EXPANDED_ISLAND_HEIGHT = 320;
 export const CLIPBOARD_EXPANDED_ISLAND_HEIGHT = 430;
+export const HOST_EXPANDED_ISLAND_HEIGHT = 430;
 export const TODO_ROW_HEIGHT = 46;
 export const TODO_GROW_START_ROWS = 2;
 export function getCollapsedIslandWidth(text: string) {
