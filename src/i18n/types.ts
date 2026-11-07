@@ -453,6 +453,7 @@ export type Translations = {
       clearing: string;
       clearStatus: string;
       scriptsDir: string;
+      autoDetect: string;
     };
 
     clipboard: {

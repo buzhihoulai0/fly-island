@@ -450,6 +450,7 @@ const en: Translations = {
       clearing: "Clearing",
       clearStatus: "Clear status",
       scriptsDir: "Scripts folder",
+      autoDetect: "DeepSeek Harness needs no hooks: its phase is read from the session store under ~/.dsh.",
     },
 
     clipboard: {

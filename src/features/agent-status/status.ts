@@ -11,20 +11,24 @@ export const DEFAULT_AGENT_TASK_STATUS: AgentTaskStatus = {
 export const DEFAULT_AGENT_STATUS: AgentStatusSnapshot = {
   codex: DEFAULT_AGENT_TASK_STATUS,
   claudeCode: DEFAULT_AGENT_TASK_STATUS,
+  dsh: DEFAULT_AGENT_TASK_STATUS,
   updatedAt: 0,
   statusPath: "",
 };
-export const AGENT_PROVIDERS: AgentProvider[] = ["codex", "claudeCode"];
+export const AGENT_PROVIDERS: AgentProvider[] = ["codex", "claudeCode", "dsh"];
 export const AGENT_PROVIDER_LABELS: Record<AgentProvider, string> = {
   codex: "Codex",
   claudeCode: "Claude Code",
+  dsh: "DeepSeek Harness",
 };
 export function isAgentAttentionPhase(phase: AgentTaskPhase) {
   return phase === "failed" || phase === "stale";
 }
 
 export function getAgentVisualState(snapshot: AgentStatusSnapshot): AgentVisualState {
-  const statuses = AGENT_PROVIDERS.map((provider) => snapshot[provider]);
+  const statuses = AGENT_PROVIDERS.map(
+    (provider) => snapshot[provider] ?? DEFAULT_AGENT_TASK_STATUS,
+  );
 
   if (statuses.some((status) => isAgentAttentionPhase(status.phase))) {
     return "attention";
@@ -39,11 +43,11 @@ export function getAgentVisualState(snapshot: AgentStatusSnapshot): AgentVisualS
 
 export function getAgentStatusLabel(snapshot: AgentStatusSnapshot, t: Translations) {
   const attentionProvider = AGENT_PROVIDERS.find((provider) =>
-    isAgentAttentionPhase(snapshot[provider].phase),
+    isAgentAttentionPhase((snapshot[provider] ?? DEFAULT_AGENT_TASK_STATUS).phase),
   );
 
   if (attentionProvider) {
-    const phase = snapshot[attentionProvider].phase;
+    const phase = (snapshot[attentionProvider] ?? DEFAULT_AGENT_TASK_STATUS).phase;
     const providerLabel = AGENT_PROVIDER_LABELS[attentionProvider];
     return phase === "stale"
       ? t.agent.stale(providerLabel)
@@ -51,7 +55,7 @@ export function getAgentStatusLabel(snapshot: AgentStatusSnapshot, t: Translatio
   }
 
   const runningProvider = AGENT_PROVIDERS.find(
-    (provider) => snapshot[provider].phase === "running",
+    (provider) => (snapshot[provider] ?? DEFAULT_AGENT_TASK_STATUS).phase === "running",
   );
 
   if (runningProvider) {

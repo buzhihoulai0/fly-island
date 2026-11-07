@@ -2,6 +2,7 @@
 
 mod claude_hooks;
 mod codex_hooks;
+mod dsh_activity;
 mod markers;
 mod snapshot;
 
@@ -13,6 +14,7 @@ use crate::system::windows_home_dir;
 
 use claude_hooks::install_claude_code_status_hooks;
 use codex_hooks::install_codex_status_hooks;
+use dsh_activity::dsh_phase;
 use markers::{
     apply_agent_running_markers, remove_agent_marker_files, CLAUDE_CODE_RUNNING_HOLD_FILE_NAME,
     CLAUDE_CODE_RUNNING_MARKER_FILE_NAME, CODEX_RUNNING_HOLD_FILE_NAME,
@@ -70,6 +72,16 @@ fn read_agent_status(app: AppHandle) -> Result<AgentStatusSnapshot, String> {
         Err(_) => default_agent_status_snapshot(status_path_display),
     };
     apply_agent_running_markers(&app_dir, &mut snapshot);
+
+    // DeepSeek Harness ships without hooks, so its phase comes from the session
+    // store it keeps rewriting while a turn is in flight.
+    if let Ok(home_dir) = windows_home_dir() {
+        snapshot.dsh = AgentTaskStatus {
+            phase: dsh_phase(&home_dir),
+            task_id: None,
+            updated_at: current_unix_millis(),
+        };
+    }
 
     Ok(snapshot)
 }

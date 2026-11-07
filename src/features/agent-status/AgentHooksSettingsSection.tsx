@@ -101,6 +101,7 @@ export function AgentHooksSettingsSection({ agentStatus, clearingAgentProvider, 
           ))}
         </div>
       </div>
+      <div className="agent-hooks-note">{t.settings.agent.autoDetect}</div>
       {agentHooksInstallState === "installed" && agentHooksInstallResult ? (
         <div className="agent-hooks-status agent-hooks-status--ok">
           <span>{t.settings.agent.scriptsDir}</span>

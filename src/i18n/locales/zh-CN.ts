@@ -453,6 +453,7 @@ const zhCN: Translations = {
       clearing: "清除中",
       clearStatus: "清除状态",
       scriptsDir: "脚本目录",
+      autoDetect: "DeepSeek Harness 无需安装钩子：会读取 ~/.dsh 下的会话活动自动判断。",
     },
 
     clipboard: {

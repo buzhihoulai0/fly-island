@@ -18,6 +18,9 @@ pub struct Fetched {
 pub fn build_client() -> Result<Client, String> {
     Client::builder()
         .timeout(REQUEST_TIMEOUT)
+        // 小主机是局域网设备：必须绕过系统代理（例如 Clash 的 127.0.0.1:7897），
+        // 否则请求会被代理接管并一直挂到超时。
+        .no_proxy()
         .build()
         .map_err(|error| format!("无法创建监控请求：{error}"))
 }

@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 
 // 与 src-tauri/src/agent_status/snapshot.rs 中的 AgentTaskStatus、AgentStatusSnapshot，以及 agent_status/mod.rs 中的 AgentHooksInstallResult 对应。
-export type AgentProvider = "codex" | "claudeCode";
+export type AgentProvider = "codex" | "claudeCode" | "dsh";
 export type AgentTaskPhase = "idle" | "running" | "completed" | "failed" | "stale";
 
 export type AgentTaskStatus = {
