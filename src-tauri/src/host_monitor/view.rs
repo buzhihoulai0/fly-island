@@ -217,7 +217,7 @@ fn parse_host(value: &Value) -> HostInfo {
         name: text(value, "name"),
         title: text(value, "title"),
         subtitle: text(value, "subtitle"),
-        cores: count(value, "cores"),
+        cores: optional_count(value, "cores"),
         uptime: number(value, "uptime"),
         load: load(value),
         temp: number(value, "temp"),
@@ -240,7 +240,7 @@ fn parse_sys(value: &Value) -> SysInfo {
         uptime: number(value, "uptime"),
         rx_rate: number(value, "rxRate"),
         tx_rate: number(value, "txRate"),
-        cores: count(value, "cores"),
+        cores: optional_count(value, "cores"),
         hostname: text(value, "hostname"),
     }
 }
@@ -260,7 +260,7 @@ fn parse_service(value: &Value) -> ServiceInfo {
         cpu: number(value, "cpu"),
         rss: number(value, "rss"),
         age: number(value, "age"),
-        count: count(value, "count"),
+        count: optional_count(value, "count"),
         ports: value
             .get("ports")
             .and_then(Value::as_array)
@@ -284,7 +284,7 @@ fn parse_port(value: &Value) -> PortInfo {
 
 fn parse_http(value: &Value) -> HttpProbe {
     HttpProbe {
-        status: count(value, "status"),
+        status: optional_count(value, "status"),
         ms: number(value, "ms"),
         ok: value.get("ok").and_then(Value::as_bool),
     }
@@ -292,7 +292,7 @@ fn parse_http(value: &Value) -> HttpProbe {
 
 fn parse_procs(value: &Value) -> Procs {
     Procs {
-        total: count(value, "total"),
+        total: optional_count(value, "total"),
         rss: number(value, "rss"),
     }
 }
@@ -323,6 +323,10 @@ fn count(value: &Value, key: &str) -> u32 {
         .and_then(Value::as_u64)
         .map(|raw| raw.min(u32::MAX as u64) as u32)
         .unwrap_or_default()
+}
+
+fn optional_count(value: &Value, key: &str) -> Option<u32> {
+    value.get(key).and_then(Value::as_u64).map(|raw| raw.min(u32::MAX as u64) as u32)
 }
 
 fn text(value: &Value, key: &str) -> Option<String> {
